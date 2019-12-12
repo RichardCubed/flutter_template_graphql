@@ -1,0 +1,132 @@
+input CreateEventInput {
+	name: String!
+	when: String!
+	where: String!
+	description: String!
+}
+
+input DeleteEventInput {
+	id: String!
+}
+
+type Mutation {
+	createEvent(input: CreateEventInput!): event
+	updateEvent(input: UpdateEventInput!): event
+	deleteEvent(input: DeleteEventInput!): event
+}
+
+type Query {
+	getEvent(id: String!): event
+	listEvents(filter: TableEventFilterInput, limit: Int, nextToken: String): eventConnection
+}
+
+type Subscription {
+	onCreateEvent(
+		id: String,
+		name: String,
+		when: String,
+		where: String,
+		description: String
+	): event
+		@aws_subscribe(mutations: ["createEvent"])
+	onUpdateEvent(
+		id: String,
+		name: String,
+		when: String,
+		where: String,
+		description: String
+	): event
+		@aws_subscribe(mutations: ["updateEvent"])
+	onDeleteEvent(
+		id: String,
+		name: String,
+		when: String,
+		where: String,
+		description: String
+	): event
+		@aws_subscribe(mutations: ["deleteEvent"])
+}
+
+input TableBooleanFilterInput {
+	ne: Boolean
+	eq: Boolean
+}
+
+input TableEventFilterInput {
+	id: TableStringFilterInput
+	name: TableStringFilterInput
+	when: TableStringFilterInput
+	where: TableStringFilterInput
+	description: TableStringFilterInput
+}
+
+input TableFloatFilterInput {
+	ne: Float
+	eq: Float
+	le: Float
+	lt: Float
+	ge: Float
+	gt: Float
+	contains: Float
+	notContains: Float
+	between: [Float]
+}
+
+input TableIDFilterInput {
+	ne: ID
+	eq: ID
+	le: ID
+	lt: ID
+	ge: ID
+	gt: ID
+	contains: ID
+	notContains: ID
+	between: [ID]
+	beginsWith: ID
+}
+
+input TableIntFilterInput {
+	ne: Int
+	eq: Int
+	le: Int
+	lt: Int
+	ge: Int
+	gt: Int
+	contains: Int
+	notContains: Int
+	between: [Int]
+}
+
+input TableStringFilterInput {
+	ne: String
+	eq: String
+	le: String
+	lt: String
+	ge: String
+	gt: String
+	contains: String
+	notContains: String
+	between: [String]
+	beginsWith: String
+}
+
+input UpdateEventInput {
+	id: String!
+	name: String
+	when: String
+	where: String
+	description: String
+}
+
+type event {
+	id: String!
+	name: String!
+	when: String!
+	where: String!
+	description: String!
+}
+
+type eventConnection {
+	items: [event]
+	nextToken: String
+}

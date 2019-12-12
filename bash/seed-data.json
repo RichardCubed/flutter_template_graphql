@@ -1,0 +1,25 @@
+{
+    "event": [
+        {
+            "PutRequest": {
+                "Item": {
+                    "id": {
+                        "S": "912ca4f2-0637-4540-a4c9-add4be707db7"
+                    },
+                    "name": {
+                        "S": "Test Name"
+                    },
+                    "when": {
+                        "S": "Test What"
+                    },
+                    "where": {
+                        "S": "Test Where"
+                    },
+                    "description": {
+                        "S": "Test Description"
+                    }
+                }
+            }
+        }
+    ]
+}
